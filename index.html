@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tebane</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
+
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
   * {
     margin: 0;
@@ -16,35 +17,45 @@
     font-family: 'Inter', sans-serif;
   }
 
-  body {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    overflow: hidden;
-    position: relative;
-    padding: 20px;
+ body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+  padding: 20px;
+  background-image: url("./GifTebane2.gif");
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: #000;
+  transition: background-image 0.35s ease;
+}
 
-    background-image: url("./GifTebane2.gif");
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: #000;
-
-    transition: background-image 0.4s ease-in-out;
-  }
-
-  /* camada escura e suave sobre o gif do fundo */
   body::after {
     content: "";
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(rgba(5, 10, 20, 0.45), rgba(5, 10, 20, 0.65)),
-      radial-gradient(circle at top, rgba(90, 140, 255, 0.12), transparent 35%);
+      linear-gradient(rgba(5, 10, 20, 0.30), rgba(5, 10, 20, 0.52)),
+      radial-gradient(circle at top, rgba(90, 140, 255, 0.08), transparent 35%);
     z-index: 0;
     pointer-events: none;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hidden {
+    display: none;
   }
 
   .profile-card {
@@ -56,15 +67,15 @@
     border-radius: 24px;
     background: linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.07) 0%,
-      rgba(255, 255, 255, 0.03) 30%,
-      rgba(0, 70, 140, 0.25) 65%,
-      rgba(0, 140, 255, 0.35) 100%
+      rgba(255, 255, 255, 0.04) 0%,
+      rgba(255, 255, 255, 0.02) 30%,
+      rgba(0, 70, 140, 0.14) 65%,
+      rgba(0, 140, 255, 0.18) 100%
     );
-    border: 1px solid rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow:
-      0 10px 40px rgba(0, 0, 0, 0.45),
-      0 0 30px rgba(0, 140, 255, 0.18);
+      0 10px 35px rgba(0, 0, 0, 0.30),
+      0 0 22px rgba(0, 140, 255, 0.10);
     text-align: center;
   }
 
@@ -74,8 +85,8 @@
     margin: 0 auto 18px;
     border-radius: 50%;
     overflow: hidden;
-    border: 3px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 25px rgba(255, 255, 255, 0.08);
+    border: 3px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
   }
 
   .avatar img {
@@ -94,7 +105,7 @@
 
   .bio {
     font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.78);
+    color: rgba(255, 255, 255, 0.82);
     line-height: 1.5;
     margin-bottom: 24px;
   }
@@ -105,25 +116,42 @@
     gap: 12px;
   }
 
-  .links a {
+  .links a,
+  .links button {
+    width: 100%;
     text-decoration: none;
     color: #fff;
     padding: 14px 18px;
     border-radius: 14px;
-    background: rgba(255, 255, 255, 0.07);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.07);
     transition: 0.25s ease;
-    font-weight: 500;
-    box-shadow: inset 0 0 0 rgba(255,255,255,0);
+    font-weight: 600;
+    font-size: 0.96rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
   }
 
-  .links a:hover {
+  .links a:hover,
+  .links button:hover {
     transform: translateY(-2px) scale(1.01);
-    background: rgba(255, 255, 255, 0.11);
-    border-color: rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.09);
+    border-color: rgba(255, 255, 255, 0.14);
     box-shadow:
-      0 8px 20px rgba(0, 0, 0, 0.25),
-      0 0 18px rgba(0, 140, 255, 0.15);
+      0 8px 20px rgba(0, 0, 0, 0.18),
+      0 0 14px rgba(0, 140, 255, 0.10);
+  }
+
+  .primary-btn {
+    background: linear-gradient(135deg, rgba(0, 120, 255, 0.34), rgba(0, 70, 180, 0.50)) !important;
+    border: 1px solid rgba(255,255,255,0.10) !important;
+    box-shadow:
+      0 10px 20px rgba(0, 60, 180, 0.14),
+      0 0 16px rgba(0, 140, 255, 0.10);
   }
 
   .socials {
@@ -139,51 +167,151 @@
     border-radius: 50%;
     display: grid;
     place-items: center;
-    background: rgba(255, 255, 255, 0.07);
+    background: rgba(255, 255, 255, 0.05);
     color: #fff;
     text-decoration: none;
     font-size: 1rem;
     transition: 0.25s ease;
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.07);
+    backdrop-filter: blur(4px);
   }
 
   .socials a:hover {
     transform: scale(1.08);
-    background: rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.10);
   }
 
-  .bg-switcher {
-    margin-top: 18px;
+  .sub-panel {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 34px 30px;
+    border-radius: 24px;
+    background: rgba(8, 12, 20, 0.46);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 14px 36px rgba(0, 0, 0, 0.24),
+      0 0 20px rgba(0, 140, 255, 0.08);
+  }
+
+  .section-title {
+    font-size: 1.9rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 12px;
+    line-height: 1.1;
+  }
+
+  .section-subtitle {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.84);
+    line-height: 1.6;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .benefits-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 28px 0;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 14px;
+  }
+
+  .benefits-list li {
+    position: relative;
+    padding-left: 22px;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.94);
+    font-size: 0.98rem;
+  }
+
+  .benefits-list li::before {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: rgba(120, 180, 255, 0.92);
+    font-weight: 700;
+  }
+
+  .sub-actions {
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    gap: 12px;
+    margin-top: 8px;
   }
 
-  .bg-button {
-    padding: 12px 18px;
-    border: none;
+  .sub-main-btn,
+  .sub-back-btn {
+    width: 100%;
+    max-width: 320px;
+    min-height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
     border-radius: 14px;
-    cursor: pointer;
-    font-weight: 600;
-    color: #fff;
-    background: linear-gradient(135deg, rgba(0, 120, 255, 0.55), rgba(0, 70, 180, 0.75));
-    border: 1px solid rgba(255,255,255,0.12);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0 18px;
     transition: 0.25s ease;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
   }
 
-  .bg-button:hover {
-    transform: translateY(-2px) scale(1.02);
-    filter: brightness(1.08);
+  .sub-main-btn {
+    color: #fff;
+    background: linear-gradient(135deg, rgba(13, 110, 253, 0.42), rgba(38, 125, 255, 0.56));
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    box-shadow:
+      0 10px 20px rgba(0, 60, 180, 0.18),
+      0 0 14px rgba(0, 140, 255, 0.10);
   }
 
-  .bg-label {
-    font-size: 0.9rem;
-    color: rgba(255,255,255,0.75);
+  .sub-main-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+  }
+
+  .sub-back-btn {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .sub-back-btn:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.09);
+  }
+
+  @media (max-width: 768px) {
+    .sub-panel {
+      max-width: 100%;
+      padding: 26px 20px;
+      border-radius: 20px;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+    }
+
+    .section-subtitle,
+    .benefits-list li {
+      font-size: 0.93rem;
+    }
   }
 
   @media (max-width: 480px) {
+    body {
+      padding: 16px;
+    }
+
     .profile-card {
       padding: 26px 18px;
       border-radius: 20px;
@@ -197,60 +325,111 @@
     .bio {
       font-size: 0.9rem;
     }
+
+    .sub-panel {
+      padding: 22px 16px;
+    }
+
+    .section-title {
+      font-size: 1.35rem;
+    }
+
+    .section-subtitle,
+    .benefits-list li {
+      font-size: 0.9rem;
+    }
+
+    .sub-main-btn,
+    .sub-back-btn {
+      max-width: 100%;
+    }
   }
 </style>
+
 <body>
+  <div class="page" id="homePage">
+    <div class="profile-card">
+      <div class="avatar">
+        <img src="./Tebanefoto.webp" alt="Avatar">
+      </div>
 
-  <div class="profile-card">
-    <div class="avatar">
-      <img src="./Tebanefoto.webp" alt="Avatar">
-    </div>
+      <h1 class="username">@Tebanelol</h1>
+      <p class="bio">
+        Oi, eu sou o Tebane. Faço lives de vez em quando. <br>✦ Normalmente a partir das 01:30 ✦
+      </p>
 
-    <h1 class="username">@Tebanelol</h1>
-    <p class="bio">
-      Oi, eu sou o Tebane faço lives 1 vez na vida e 1 na morte. <br>✦ A partir das 01:30 ✦
-    </p>
+      <div class="links">
+        <a href="https://discord.com/invite/C5Eahbr44W" target="_blank">Discord</a>
+        <a href="https://livepix.gg/tebane" target="_blank">Live Pix</a>
+        <a href="https://www.tiktok.com/@tebanelol?lang=pt-BR" target="_blank">TikTok</a>
+        <button class="primary-btn" id="openSubPage">Seja sub</button>
+      </div>
 
-    <div class="links">
-      <a href="https://discord.com/invite/C5Eahbr44W" target="_blank">Discord</a>
-      <a href="https://livepix.gg/tebane" target="_blank">Live Pix</a>
-      <a href="https://www.tiktok.com/@tebanelol?lang=pt-BR" target="_blank">TikTok</a>
-    </div>
-
-    <div class="socials">
-      <a href="https://discord.com/invite/C5Eahbr44W" target="_blank">
-        <i class="fa-brands fa-discord"></i>
-      </a>
-      <a href="https://www.tiktok.com/@tebanelol?lang=pt-BR" target="_blank">
-        <i class="fa-brands fa-tiktok"></i>
-      </a>
-    </div>
-
-    <div class="bg-switcher">
-      <button class="bg-button" id="toggleBgBtn">Trocar fundo</button>
-      <span class="bg-label" id="bgName">Fundo atual: GifTebane2</span>
+      <div class="socials">
+        <a href="https://discord.com/invite/C5Eahbr44W" target="_blank">
+          <i class="fa-brands fa-discord"></i>
+        </a>
+        <a href="https://www.tiktok.com/@tebanelol?lang=pt-BR" target="_blank">
+          <i class="fa-brands fa-tiktok"></i>
+        </a>
+      </div>
     </div>
   </div>
 
-  <script>
-    const backgrounds = [
-      { file: "./GifTebane2.gif", name: "GifTebane2" },
-      { file: "./Claudete.gif", name: "Claudete" },
-      { file: "./Aura.gif", name: "Aura" }
-    ];
+  <div class="page hidden" id="subPage">
+    <div class="sub-panel">
+      <h2 class="section-title">Benefícios de ser sub</h2>
 
-    let currentBg = 0;
+      <p class="section-subtitle">
+        Sendo sub, você desbloqueia vantagens especiais nas lives e nas partidas comigo:
+      </p>
 
-    const body = document.body;
-    const toggleBgBtn = document.getElementById("toggleBgBtn");
-    const bgName = document.getElementById("bgName");
+      <ul class="benefits-list">
+        <li>Prioridade para jogar <strong>Dead by Daylight</strong> comigo durante as lives.</li>
+        <li>Participação em <strong>call no Discord</strong> comigo durante a live.</li>
+        <li><strong>Sorteio mensal de R$ 50,00</strong> exclusivo para subs.</li>
+        <li>Direito de <strong>escolher músicas</strong> para tocar durante a live.</li>
+        <li>Pode escolher <strong>1 survivor + 4 perks</strong> para eu usar em uma partida.</li>
+        <li>Pode escolher <strong>1 killer + 4 perks</strong> para eu jogar em uma partida.</li>
+        <li>Em cada uma das opções acima, é possível fazer <strong>até 2 escolhas</strong>.</li>
+        <li>Não vale montar combinações muito trolls, como por exemplo <strong>4 perks de exaustão</strong>.</li>
+      </ul>
 
-    toggleBgBtn.addEventListener("click", () => {
-      currentBg = (currentBg + 1) % backgrounds.length;
-      body.style.backgroundImage = `url("${backgrounds[currentBg].file}")`;
-      bgName.textContent = `Fundo atual: ${backgrounds[currentBg].name}`;
-    });
-  </script>
+      <div class="sub-actions">
+        <a class="sub-main-btn" href="https://livepix.gg/tebane" target="_blank">Seja Sub</a>
+        <button class="sub-back-btn" id="backToHome">Voltar</button>
+      </div>
+    </div>
+  </div>
 
+<script>
+  const body = document.body;
+  const homePage = document.getElementById("homePage");
+  const subPage = document.getElementById("subPage");
+  const openSubPage = document.getElementById("openSubPage");
+  const backToHome = document.getElementById("backToHome");
+
+  openSubPage.addEventListener("click", () => {
+    homePage.classList.add("hidden");
+    subPage.classList.remove("hidden");
+
+    body.style.backgroundImage = 'url("./Claudete.gif")';
+    body.style.backgroundSize = "contain";
+    body.style.backgroundPosition = "center center";
+    body.style.backgroundRepeat = "no-repeat";
+    body.style.backgroundColor = "#000";
+  });
+
+  backToHome.addEventListener("click", () => {
+    subPage.classList.add("hidden");
+    homePage.classList.remove("hidden");
+
+    body.style.backgroundImage = 'url("./GifTebane2.gif")';
+    body.style.backgroundSize = "contain";
+    body.style.backgroundPosition = "center center";
+    body.style.backgroundRepeat = "no-repeat";
+    body.style.backgroundColor = "#000";
+  });
+</script>
 </body>
 </html>
